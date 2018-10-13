@@ -28,3 +28,13 @@ function get_menu(parentid,url) {
     ajax_menu.open('GET',url,true);
     ajax_menu.send();
 }
+
+function showhide(id){
+    var target=document.getElementById(id);
+    if(target.style.display==""){
+        target.style.display="none";
+    }
+    else{
+        target.style.display="";
+    }
+}

@@ -1,10 +1,10 @@
 <?php
 
   return [
-      
+      "dashboard"=>"dashboard",
       "records"=>"sign up history",
       "checkin"=>"check in",
-      "signup"=>"sign up",
+      "signup"=>"purchase courses",
       "remainclass"=>"my lessons remaining",
       "manager"=>"managers",
       "switchlang"=>"切换至中文",
@@ -26,6 +26,9 @@
       "alipay"=>"alipay",
       "wechat"=>"wechat",
       "cash"=>"pay in cash before taking lesson",
+      "managerid"=>"manager ID",
+      "pwd"=>"password",
+      "contact"=>"Please contact us via wechat or QQ if you are planning to join us:",
   ];
 
 ?>

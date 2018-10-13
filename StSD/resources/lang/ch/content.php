@@ -1,9 +1,10 @@
 <?php
 
   return [
+      "dashboard"=>"返回主页",
       "records"=>"报名记录",
       "checkin"=>"签到",
-      "signup"=>"报名",
+      "signup"=>"购买课程",
       "remainclass"=>"剩余课程",
       "manager"=>"管理者选项",
       "switchlang"=>"switch to English",
@@ -23,6 +24,9 @@
       "alipay"=>"支付宝",
       "wechat"=>"微信支付",
       "cash"=>"到课时现金支付",
+      "managerid"=>"管理员身份",
+      "pwd"=>"密码",
+      "contact"=>"新学员请先加QQ或微信咨询和报名：",
   ];
 
 ?>

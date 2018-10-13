@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\student;
 use App\order;
 use App\order_type;
+use App\manager;
 
 class general_requests extends Controller
 {
@@ -18,8 +19,11 @@ class general_requests extends Controller
         $stat=0;
         $list=order::fetch_all_by_IDnumber($id);
         foreach ($list as $temp){
+            if($temp->start_date==null||$temp->end_date==null){
+                return "no available lessons found";
+            }
             $statoforder=order::judge_duration($temp->start_date, $temp->end_date);
-            echo $temp->start_date."-----".$temp->end_date."-------".$statoforder."<br>";
+            //echo $temp->start_date."-----".$temp->end_date."-------".$statoforder."<br>";
             if($statoforder==0){
                 order::change_of_stat($temp->id, 0);
             }
@@ -43,6 +47,7 @@ class general_requests extends Controller
         else{
             echo "no available lessons found";
         }
+        echo "</br><a href='/'>return</a>";
     }
     
     public function signup(){
@@ -54,11 +59,14 @@ class general_requests extends Controller
         $month=input::post("month");
         $day=input::post("day");
         if($name==null||$lisence==null||$period==null||$payment==null||$year==null||$month==null||$day==null){
+            session()->put("errorinfo","请完整填写  please fill up all infos");
             return redirect()->back();
         }
         $stu=student::double_check($name, $lisence);
         if($stu==null){
-            $stu=student::create_student($name, $lisence);
+            
+            session()->put("errorinfo","请先加QQ或微信咨询注册  please make contact via QQ or Wechat first");
+            return redirect()->back();
         }
         $order_type= order_type::aquire_one_type($period);
         $duration=$order_type->period;
@@ -78,8 +86,9 @@ class general_requests extends Controller
         else if($duration=="T"){
             $enddate= $this->end_of_term;
         }
-        order::create_order($stu->id, $startdate, $enddate, $period,$payment);   
-        return redirect()->route("homepage");
+        order::create_order($stu->id, $startdate, $enddate, $period,$payment);
+        echo "purchase complete";
+        echo "</br><a href='/'>return</a>";
     }
     public function records(){
         $idnum=input::post("idnum");
@@ -92,5 +101,46 @@ class general_requests extends Controller
         else{
             return redirect()->back();
         }
+    }
+    
+    public function login(){
+        $id=input::post("id");
+        $pwd=input::post("pwd");
+        
+        $status=manager::tokenin($id,$pwd);
+        if($status==1){
+            return redirect("/studentlist");
+        }
+        else{
+            return redirect()->back();
+        }
+    }
+    
+    public function accept($id){
+        student::student_accept($id);
+        return redirect("/studentlist");
+    }
+    
+    public function dequalify($id){
+        student::student_dequalify($id);
+        return redirect("/studentlist");
+    }
+    
+    public function pageup(){
+        session()->put("pagenum",session()->get("pagenum")+1);
+        return redirect("/studentlist");
+    }
+    public function pagedn(){
+        if(session()->get("pagenum")>1){
+            session()->put("pagenum",session()->get("pagenum")-1);
+        }
+        return redirect("/studentlist");
+    }
+    
+    public function add_student(){
+        $name=input::post("name");
+        $id=input::post("idnum");
+        student::student_add($name,$id);
+        return redirect("/studentlist");
     }
 }

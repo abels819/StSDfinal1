@@ -37,18 +37,19 @@
         </h2>
             
         <div class="nav-bar-container">
+                <a href="{{url('/')}}" class="btn btn-lg">@lang('content.dashboard')</a>
                 <a href="{{url("checkin")}}" class="btn btn-lg">@lang('content.checkin')</a>
                 <a href="{{url("signup")}}" class="btn btn-lg">@lang('content.signup')</a>
                 <a href="{{url("records")}}" class="btn btn-lg">@lang('content.remainclass')</a>
-                <a href='#' class="btn btn-lg">@lang('content.manager')</a>
+                <a href="{{url('manager')}}" class="btn btn-lg">@lang('content.manager')</a>
                 <a href="{{url('general_requests/switchlang')}}/@lang('content.langtar')" class="btn btn-lg">@lang('content.switchlang')</a>
         </div>
         <div class="content-section">
-            <div class="page-title">
+            <div class="page-title" >
                 <strong>{{$page_title}}</strong>
             </div>       
-            <div>
-                @section('main_content')
+            <div id="main_content_section">
+                @section('main_content').
                 @show
             </div>
                 
@@ -61,3 +62,4 @@
         
     </body>
 </html>
+

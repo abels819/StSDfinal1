@@ -27,7 +27,7 @@ h2{
     width: 100%;
     color: #26182b;
     text-align: center;
-    font-size: 5px;
+    font-size: 13px;
     font-style: italic;
 }
 .header_bar{
@@ -86,7 +86,18 @@ footer{
     
 }
 .form{
-    margin: 50px auto;
+    margin: 10px auto;
     width: 320px;
     height: 50px;
 }
+
+div.frontpage{
+    margin: 0px auto;
+    width: 96%;
+    background-color: lightgray;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+

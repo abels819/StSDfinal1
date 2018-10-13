@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class manager extends Model
 {
-    public function tokenin($id,$pwd){
+    public static function tokenin($id,$pwd){
         $manager= DB::table("manager")->where(["id"=>$id])->first();
         if($manager==null){
             return 0;
@@ -30,4 +30,9 @@ class manager extends Model
     public function create_manager($pwd){
         DB::table("manager")->insert(["pwd"=>md5($pwd)]);
     }
+    
+    public static function add_tabin(){
+        DB::table("tabinrecord")->insert(["time"=> date("y-m-d H:m:s")]);
+    }
+    
 }

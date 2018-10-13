@@ -5,6 +5,16 @@
 @stop
 
 @section("main_content")
+<div class="form">
+    <p style="color:white">@lang('content.contact')</p>
+    <img src='{{asset("imgs/qq.jpg")}}' height="120px">
+    <img src='{{asset("imgs/wechat.png")}}' height="120px">
+    <img src='{{asset("imgs/qqgroup.jpg")}}' height="120px">
+</div>
+<br><br>
+<div class="form">
+    <p style="color:red;font-size: 30px">{{session()->pull("errorinfo")}}</p>
+</div>
 <form action="{{url('general_requests/signup')}}" method="post">
     {{csrf_field()}}
     <input type="hidden" name="payment" id="payment" />
